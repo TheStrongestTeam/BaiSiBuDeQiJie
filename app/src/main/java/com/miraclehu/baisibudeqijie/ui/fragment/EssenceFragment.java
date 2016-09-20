@@ -37,6 +37,7 @@ public class EssenceFragment extends BaseFragment {
     ViewPager essenceVpContent;
     @BindArray(R.array.essence_title)
     String[] mTitle;
+
     @Override
     public int getLayoutResId() {
         return R.layout.fragment_essence;
@@ -45,7 +46,7 @@ public class EssenceFragment extends BaseFragment {
     @Override
     protected void initView(Bundle savedInstanceState) {
 
-        essenceVpContent.setAdapter(new CommonViewPagerAdapter(getChildFragmentManager(),getFragmentData(),mTitle));
+//        essenceVpContent.setAdapter(new CommonViewPagerAdapter(getChildFragmentManager(),getFragmentData(),mTitle));
     }
 
     private List<Fragment> getFragmentData() {
