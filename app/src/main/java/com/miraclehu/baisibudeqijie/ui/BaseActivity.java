@@ -21,6 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getContentViewId());
 
         mBinder = ButterKnife.bind(this);
+        //让状态栏的颜色变为透明
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         initView(savedInstanceState);
