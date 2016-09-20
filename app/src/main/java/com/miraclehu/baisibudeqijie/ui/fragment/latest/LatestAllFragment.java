@@ -46,7 +46,6 @@ public class LatestAllFragment extends BaseFragment {
         HttpUtils.getAsynString(HttpConstants.LASTEST_ALL_BEGIN + sPage + HttpConstants.LASTEST_ALL_END, new HttpUtils.ResultCallback() {
             @Override
             public void onFailure(Exception e) {
-
             }
 
             @Override
