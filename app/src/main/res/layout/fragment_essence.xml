@@ -7,30 +7,37 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/title">
+        android:layout_height="60dp"
+        android:background="@color/title"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true">
 
         <ImageView
             android:id="@+id/essence_iv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/top_navigation_middle"
-            android:layout_centerInParent="true"/>
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"/>
         <ImageView
             android:id="@+id/essence_iv_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/top_refresh_btn"
-            android:layout_toRightOf="@id/essence_iv_title"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"/>
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/essence_iv_title"/>
         <ImageView
             android:id="@+id/essence_iv_through"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/essence_through_bg"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
+            android:layout_marginBottom="5dp"
             android:layout_marginRight="10dp"/>
     </RelativeLayout>
 

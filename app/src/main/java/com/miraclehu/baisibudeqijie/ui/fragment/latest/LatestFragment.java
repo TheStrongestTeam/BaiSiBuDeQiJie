@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.leavessilent.mylibrary.adapters.ViewPagerAdapter;
 import com.miraclehu.baisibudeqijie.R;
 import com.miraclehu.baisibudeqijie.adapter.CommonViewPagerAdapter;
 import com.miraclehu.baisibudeqijie.ui.fragment.BaseFragment;
@@ -19,7 +18,6 @@ import java.util.List;
 import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by user on 2016/9/20.
