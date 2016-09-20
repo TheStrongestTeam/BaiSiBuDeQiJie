@@ -7,6 +7,15 @@ import java.util.List;
  */
 public class VideoRoot {
     private List<VideoList>list;
+    private Info info;
+
+    public Info getInfo() {
+        return info;
+    }
+
+    public void setInfo(Info info) {
+        this.info = info;
+    }
 
     public List<VideoList> getList() {
         return list;

@@ -16,9 +16,9 @@ import butterknife.Unbinder;
  */
 public abstract class BaseFragment extends Fragment {
 
-    private View layout;
-    private Unbinder mBinder;
-    private Context context;
+    public View layout;
+    public Unbinder mBinder;
+    public Context context;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

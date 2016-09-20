@@ -4,11 +4,8 @@
     <!-- TODO: Update blank fragment layout -->
 
 
-    <TextView
+    <ListView
+        android:id="@+id/latest_all_lv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#61f119"
-        android:gravity="center"
-        android:text="全部"
-        android:textColor="#ffff"/>
+        android:layout_height="match_parent"/>
 </FrameLayout>
