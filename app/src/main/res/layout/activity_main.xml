@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.MainActivity">
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#e7e4e4">
+
+        <RadioGroup
+            android:id="@+id/controller"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/controller_essence"
+                style="@style/Controller"
+                android:drawableTop="@drawable/controller_essence_bg"
+                android:text="@string/essence"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/controller_latest"
+                style="@style/Controller"
+                android:drawableTop="@drawable/controller_latest_bg"
+                android:text="@string/latest"
+                android:layout_marginRight="30dp"/>
+
+            <RadioButton
+                android:id="@+id/controller_attention"
+                style="@style/Controller"
+                android:drawableTop="@drawable/controller_attention_bg"
+                android:text="@string/attention"
+                android:layout_marginLeft="30dp"/>
+
+            <RadioButton
+                android:id="@+id/controller_my"
+                style="@style/Controller"
+                android:drawableTop="@drawable/controller_my_bg"
+                android:text="@string/my" />
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/controller_writepost"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/controller_writepost_bg"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+</LinearLayout>
