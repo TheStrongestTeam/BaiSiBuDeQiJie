@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,39 +16,54 @@
             android:id="@+id/essence_iv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/top_navigation_middle"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            android:src="@mipmap/top_navigation_middle" />
+
         <ImageView
             android:id="@+id/essence_iv_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/top_refresh_btn"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/essence_iv_title"/>
+            android:layout_toRightOf="@id/essence_iv_title"
+            android:src="@mipmap/top_refresh_btn" />
+
         <ImageView
             android:id="@+id/essence_iv_through"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/essence_through_bg"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="5dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:background="@drawable/essence_through_bg" />
     </RelativeLayout>
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/essence_tab_title"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabBackground="@color/title"
-        app:tabTextColor="#e6e3e3"
-        app:tabIndicatorColor="#ffffff">
-    </android.support.design.widget.TabLayout>
+        android:layout_height="40dp"
+        android:background="@color/titleBackgroundColor">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/essence_tab_title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/titleBackgroundColor"
+            app:tabIndicatorColor="#fff"
+            app:tabMaxWidth="70dp"
+            app:tabMinWidth="60dp"
+            app:tabSelectedTextColor="#f2eaea"
+            app:tabTextColor="#f2eaea">
+
+        </android.support.design.widget.TabLayout>
+
+    </FrameLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/essence_vp_content"

@@ -8,12 +8,12 @@ import com.miraclehu.baisibudeqijie.ui.fragment.BaseFragment;
 /**
  * Created by user on 2016/9/20.
  */
-public class EssenceSoundFragment extends BaseFragment {
-    public static final String TAG = EssenceSoundFragment.class.getSimpleName();
+public class EssenceRankFragment extends BaseFragment {
+    public static final String TAG = EssenceRankFragment.class.getSimpleName();
 
     @Override
     public int getLayoutResId() {
-        return R.layout.fragment_essence_sound;
+        return R.layout.fragment_essence_rank;
     }
 
     @Override
