@@ -5,4 +5,20 @@
     <string name="latest">新帖</string>
     <string name="attention">关注</string>
     <string name="my">我的</string>
+
+    <string-array name="latest_title">
+        <item>全部</item>
+        <item>视频</item>
+        <item>图片</item>
+        <item>段子</item>
+        <item>网红</item>
+        <item>美女</item>
+        <item>冷知识</item>
+        <item>游戏</item>
+        <item>声音</item>
+        <item>自拍</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

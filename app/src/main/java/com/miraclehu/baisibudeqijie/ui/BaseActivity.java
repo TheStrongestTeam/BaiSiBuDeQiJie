@@ -3,6 +3,7 @@ package com.miraclehu.baisibudeqijie.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -20,6 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getContentViewId());
 
         mBinder = ButterKnife.bind(this);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         initView(savedInstanceState);
 

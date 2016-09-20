@@ -11,7 +11,7 @@ import android.widget.RadioGroup;
 import com.miraclehu.baisibudeqijie.R;
 import com.miraclehu.baisibudeqijie.ui.fragment.AttentionFragment;
 import com.miraclehu.baisibudeqijie.ui.fragment.EssenceFragment;
-import com.miraclehu.baisibudeqijie.ui.fragment.LatestFragment;
+import com.miraclehu.baisibudeqijie.ui.fragment.latest.LatestFragment;
 import com.miraclehu.baisibudeqijie.ui.fragment.MyFragment;
 
 import java.lang.reflect.InvocationTargetException;
