@@ -20,6 +20,14 @@ public class VideoList {
     private Image image;
     private Gif gif;
 
+    public Gif getGif() {
+        return gif;
+    }
+
+    public void setGif(Gif gif) {
+        this.gif = gif;
+    }
+
     public Image getImage() {
         return image;
     }

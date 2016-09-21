@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.leavessilent.mylibrary.adapters.MultipleBaseAdapter;
+import com.leavessilent.mylibrary.adapters.SingleBaseAdapter;
 import com.miraclehu.baisibudeqijie.R;
 import com.miraclehu.baisibudeqijie.model.Video;
 import com.miraclehu.baisibudeqijie.model.VideoList;
@@ -21,7 +22,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 /**
  * Created by Administrator on 2016/9/20 0020.
  */
-public class LastestAllAdapter extends MultipleBaseAdapter<VideoList> {
+public class LastestAllAdapter extends SingleBaseAdapter<VideoList> {
     private static final String TAG = LastestAllAdapter.class.getSimpleName();
     private ImageView mVip;
     private ImageView mV;
@@ -33,19 +34,11 @@ public class LastestAllAdapter extends MultipleBaseAdapter<VideoList> {
     private ImageView mThumbnail;
     private View mLayoutVideo;
 
-    public LastestAllAdapter(Context context, List<VideoList> data, int... layoutResIds) {
-        super(context, data, layoutResIds);
+    public LastestAllAdapter(Context context, List<VideoList> data, int layoutId) {
+        super(context, data, layoutId);
         this.mContext = context;
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        int type = 0;
-        if (getItem(position).getVideo() != null) {
-            type = 0;
-        }
-        return type;
-    }
 
     @Override
     protected void bindData(ViewHolder holder, VideoList item) {
@@ -95,10 +88,18 @@ public class LastestAllAdapter extends MultipleBaseAdapter<VideoList> {
         }
         //判断是否是Gif
         if (item.getGif()!=null) {
-
+            ViewGroup.LayoutParams layoutParams = mThumbnail.getLayoutParams();
+            layoutParams.height=item.getGif().getHeight();
+            layoutParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
+            Glide.with(mContext).load(item.getGif().getImages().get(0)).asGif().into(mThumbnail);
         }
-        //
-
-        //
-    }
+        //判断是否是image
+        if (item.getImage()!=null) {
+            ViewGroup.LayoutParams layoutParams = mThumbnail.getLayoutParams();
+            layoutParams.height=item.getImage().getHeight();
+            layoutParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
+//            Glide.with(mContext).load(item.getImage().getMedium().get(0)).into(mThumbnail);
+        }
+      //
 }
+        }
