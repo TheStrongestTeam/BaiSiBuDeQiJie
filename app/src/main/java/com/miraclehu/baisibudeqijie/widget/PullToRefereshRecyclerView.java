@@ -1,12 +1,10 @@
-package com.miraclehu.baisibudeqijie.wedgit;
+package com.miraclehu.baisibudeqijie.widget;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.handmark.pulltorefresh.library.LoadingLayoutProxy;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.miraclehu.baisibudeqijie.R;
 

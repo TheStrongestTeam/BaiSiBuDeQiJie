@@ -1,4 +1,4 @@
-package com.miraclehu.baisibudeqijie.wedgit;
+package com.miraclehu.baisibudeqijie.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

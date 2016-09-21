@@ -37,4 +37,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="check_look_full_pic">点击查看全图</string>
 
+
+    <string name="str_normal">下拉可以刷新</string>
+    <string name="str_release">松开立即刷新</string>
+    <string name="str_refreshing">正在刷新...</string>
+
+    <string name="not_updated_yet">暂未更新</string>
+    <string name="update_at">最后更新： %1$s前</string>
+
 </resources>
