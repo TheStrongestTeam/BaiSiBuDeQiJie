@@ -1,5 +1,7 @@
 package com.miraclehu.baisibudeqijie.model;
 
+import android.support.annotation.VisibleForTesting;
+
 import java.util.List;
 
 /**
@@ -10,6 +12,15 @@ public class Image {
     private List<String> medium;
     private int height;
     private int width;
+    private List<String>big;
+
+    public List<String> getBig() {
+        return big;
+    }
+
+    public void setBig(List<String> big) {
+        this.big = big;
+    }
 
     public List<String> getMedium() {
         return medium;

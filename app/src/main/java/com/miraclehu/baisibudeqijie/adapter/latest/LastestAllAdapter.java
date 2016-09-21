@@ -78,28 +78,42 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> {
             //设置video预览图片
             mLayoutVideo.setVisibility(View.VISIBLE);
             ViewGroup.LayoutParams params = mLayoutVideo.getLayoutParams();
-            params.height=item.getVideo().getHeight();
+            params.height = item.getVideo().getHeight();
             ViewGroup.LayoutParams layoutParams = mThumbnail.getLayoutParams();
-            layoutParams.height=item.getVideo().getHeight();
-            layoutParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
+            layoutParams.height = item.getVideo().getHeight();
+            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
             Glide.with(mContext).load(item.getVideo().getThumbnail().get(0)).into(mThumbnail);
+        } else
+        //判断是否是Gif
+        if (item.getGif() != null) {
+            mLayoutVideo.setVisibility(View.VISIBLE);
+            ViewGroup.LayoutParams params = mLayoutVideo.getLayoutParams();
+            params.height=item.getGif().getHeight();
+            ViewGroup.LayoutParams layoutParams = mThumbnail.getLayoutParams();
+            layoutParams.height = item.getGif().getHeight();
+            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            Glide.with(mContext).load(item.getGif().getImages().get(0)).asGif().into(mThumbnail);
+        } else
+        //判断是否是image
+        if (item.getImage() != null) {
+            int width = mThumbnail.getWidth();
+            int imageHeight = item.getImage().getHeight();
+            int imageWidth = item.getImage().getWidth();
+            int height = width * imageHeight / imageWidth;
+            mLayoutVideo.setVisibility(View.VISIBLE);
+            ViewGroup.LayoutParams params = mLayoutVideo.getLayoutParams();
+            params.height= height;
+            ViewGroup.LayoutParams layoutParams = mThumbnail.getLayoutParams();
+            layoutParams.height = height;
+            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            if (item.getImage().getMedium().size() != 0) {
+                Glide.with(mContext).load(item.getImage().getMedium().get(0)).into(mThumbnail);
+            } else if (item.getImage().getBig().size() != 0) {
+                Glide.with(mContext).load(item.getImage().getBig().get(0)).into(mThumbnail);
+            }
         } else {
             mLayoutVideo.setVisibility(View.GONE);
         }
-        //判断是否是Gif
-        if (item.getGif()!=null) {
-            ViewGroup.LayoutParams layoutParams = mThumbnail.getLayoutParams();
-            layoutParams.height=item.getGif().getHeight();
-            layoutParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
-            Glide.with(mContext).load(item.getGif().getImages().get(0)).asGif().into(mThumbnail);
-        }
-        //判断是否是image
-        if (item.getImage()!=null) {
-            ViewGroup.LayoutParams layoutParams = mThumbnail.getLayoutParams();
-            layoutParams.height=item.getImage().getHeight();
-            layoutParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
-//            Glide.with(mContext).load(item.getImage().getMedium().get(0)).into(mThumbnail);
-        }
-      //
+        //
+    }
 }
-        }
