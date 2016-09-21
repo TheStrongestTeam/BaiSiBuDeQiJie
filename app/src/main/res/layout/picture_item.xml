@@ -100,11 +100,11 @@
 
     <include layout="@layout/cai_ding_share_layout"/>
 
-    <com.miraclehu.baisibudeqijie.wedgit.CommonListView
+    <com.miraclehu.baisibudeqijie.widget.CommonListView
         android:id="@+id/picture_item_lv_common"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.miraclehu.baisibudeqijie.wedgit.CommonListView>
+    </com.miraclehu.baisibudeqijie.widget.CommonListView>
 
 
 </LinearLayout>
