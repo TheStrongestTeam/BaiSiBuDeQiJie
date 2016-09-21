@@ -7,16 +7,16 @@ import android.widget.ListView;
 /**
  * Created by user on 2016/9/21.
  */
-public class CommonListView extends ListView {
-    public CommonListView(Context context) {
+public class CommentListView extends ListView {
+    public CommentListView(Context context) {
         this(context,null);
     }
 
-    public CommonListView(Context context, AttributeSet attrs) {
+    public CommentListView(Context context, AttributeSet attrs) {
         this(context, attrs,0);
     }
 
-    public CommonListView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CommentListView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

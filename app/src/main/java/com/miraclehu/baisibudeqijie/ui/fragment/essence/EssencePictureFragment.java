@@ -3,6 +3,7 @@ package com.miraclehu.baisibudeqijie.ui.fragment.essence;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,20 +17,24 @@ import com.miraclehu.baisibudeqijie.common.HttpConstants;
 import com.miraclehu.baisibudeqijie.model.VideoRoot;
 import com.miraclehu.baisibudeqijie.ui.fragment.BaseFragment;
 
-import javax.security.auth.login.LoginException;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.appsdream.nestrefresh.base.AbsRefreshLayout;
+import cn.appsdream.nestrefresh.base.OnPullListener;
+import cn.appsdream.nestrefresh.normalstyle.NestRefreshLayout;
 
 /**
  * Created by user on 2016/9/20.
  */
-public class EssencePictureFragment extends BaseFragment {
+public class EssencePictureFragment extends BaseFragment implements OnPullListener {
     public static final String TAG = EssencePictureFragment.class.getSimpleName();
     @BindView(R.id.essence_picture_rv)
     RecyclerView essencePictureRv;
+    @BindView(R.id.essence_nest_refresh)
+    NestRefreshLayout essenceNestRefresh;
     private EssencePictureAdapter adapter;
-    private int pageNum = 0;
+    private long pageNum = 0;
+    private long np;
 
     @Override
     public int getLayoutResId() {
@@ -38,40 +43,68 @@ public class EssencePictureFragment extends BaseFragment {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+
+        essenceNestRefresh.setOnLoadingListener(this);
+        essenceNestRefresh.setPullRefreshEnable(true);
+        essenceNestRefresh.setPullLoadEnable(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         essencePictureRv.setLayoutManager(layoutManager);
-        adapter = new EssencePictureAdapter(context,null);
+        adapter = new EssencePictureAdapter(context, null);
         essencePictureRv.setAdapter(adapter);
-
         setupView(State.DOWN);
     }
 
-    enum State{
-        DOWN,UP
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
     }
+
+
+    enum State {
+        DOWN, UP
+    }
+
     private void setupView(final State state) {
 
         HttpUtils.getAsynString(HttpConstants.ESSENCE_PICTURE_BEGIN + pageNum + HttpConstants.ESSENCE_PICTURE_END, new HttpUtils.ResultCallback() {
+
             @Override
             public void onFailure(Exception e) {
-                Log.e(TAG, "onFailure: 777777777777777777777" );
+                Log.e(TAG, "onFailure: 777777777777777777777");
             }
 
             @Override
             public void onFinish(String result) {
-                Log.e(TAG, "onFinish: " + result );
+                Log.e(TAG, "onFinish: " + result);
                 Gson gson = new Gson();
                 VideoRoot videoRoot = gson.fromJson(result, VideoRoot.class);
+                np = videoRoot.getInfo().getNp();
                 switch (state) {
                     case DOWN:
                         adapter.updateRes(videoRoot.getList());
-                        videoRoot.getList().get(0).getImage().getHeight();
                         break;
                     case UP:
+                        adapter.addDataList(videoRoot.getList());
                         break;
                 }
+                essenceNestRefresh.onLoadFinished();
             }
         });
+    }
+
+    @Override
+    public void onRefresh(AbsRefreshLayout listLoader) {
+        pageNum = 0;
+        setupView(State.DOWN);
+    }
+
+    @Override
+    public void onLoading(AbsRefreshLayout listLoader) {
+        pageNum = np;
+        setupView(State.UP);
     }
 
 }
