@@ -9,18 +9,19 @@
         android:layout_height="50dp"
         android:orientation="horizontal">
         <FrameLayout
-            android:layout_width="50dp"
+            android:layout_width="45dp"
             android:layout_height="40dp">
             <ImageView
                 android:id="@+id/all_item_header"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="5dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
                 android:src="@mipmap/ic_launcher"/>
             <ImageView
                 android:id="@+id/all_item_v"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
                 android:src="@mipmap/bg_user_v"
                 android:layout_gravity="right|bottom"/>
         </FrameLayout>
@@ -28,11 +29,12 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp">
             <TextView
                 android:id="@+id/all_item_name"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="18dp"
                 android:text="username"
                 android:gravity="center_vertical"/>
             <ImageView
@@ -40,14 +42,61 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginLeft="3dp"
-                android:layout_toRightOf="@+id/all_item_name"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_toRightOf="@+id/all_item_name"/>
             <TextView
                 android:id="@+id/all_item_passtime"
                 android:layout_width="wrap_content"
-                android:layout_height="16dp"
+                android:layout_height="17dp"
                 android:layout_below="@+id/all_item_name"
                 android:text="time"/>
         </RelativeLayout>
     </LinearLayout>
+    <TextView
+        android:id="@+id/all_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="test"/>
+    <RelativeLayout
+        android:id="@+id/all_item_layout_video"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="#d1d1d1"
+        android:clickable="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp">
+        <ImageView
+            android:id="@+id/all_item_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:scaleType="fitXY"/>
+
+        <ImageView
+            android:id="@+id/all_item_loading_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/post_loading_icon"
+            android:layout_gravity="center_horizontal"
+            android:layout_above="@+id/linearLayout"
+            android:layout_centerHorizontal="true"/>
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="#0f282828"
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/linearLayout">
+            <ImageView
+                android:id="@+id/all_item_play"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:src="@mipmap/video_play"/>
+        </LinearLayout>
+    </RelativeLayout>
+    <include layout="@layout/cai_ding_share_layout"/>
 </LinearLayout>
