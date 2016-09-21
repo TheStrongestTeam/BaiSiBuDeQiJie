@@ -9,7 +9,7 @@ public class Image {
 
     private List<String> medium;
     private int height;
-    private int weight;
+    private int width;
 
     public List<String> getMedium() {
         return medium;
@@ -27,12 +27,11 @@ public class Image {
         this.height = height;
     }
 
-    public int getWeight() {
-        return weight;
+    public int getWidth() {
+        return width;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public void setWidth(int width) {
+        this.width = width;
     }
-
 }
