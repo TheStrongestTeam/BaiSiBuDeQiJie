@@ -1,11 +1,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
-             android:layout_height="match_parent">
+             android:layout_height="match_parent"
+             xmlns:app="http://schemas.android.com/apk/res-auto">
     <!-- TODO: Update blank fragment layout -->
 
-
+    <cn.appsdream.nestrefresh.normalstyle.NestRefreshLayout
+        android:id="@+id/latest_all_referesh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:headerNestLayout="@layout/header">
     <ListView
         android:id="@+id/latest_all_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    </cn.appsdream.nestrefresh.normalstyle.NestRefreshLayout>
 </FrameLayout>

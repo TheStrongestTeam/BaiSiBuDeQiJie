@@ -18,17 +18,23 @@ import com.miraclehu.baisibudeqijie.ui.fragment.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.appsdream.nestrefresh.base.AbsRefreshLayout;
+import cn.appsdream.nestrefresh.base.OnPullListener;
+import cn.appsdream.nestrefresh.normalstyle.NestRefreshLayout;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LatestAllFragment extends BaseFragment {
+public class LatestAllFragment extends BaseFragment implements OnPullListener {
 
 
     @BindView(R.id.latest_all_lv)
     ListView mLatestAllLv;
+    @BindView(R.id.latest_all_referesh)
+    NestRefreshLayout mLatestAllReferesh;
     private LastestAllAdapter mAdapter;
-    private long  page=0;
+    private long page = 0;
 
     @Override
     public int getLayoutResId() {
@@ -37,13 +43,14 @@ public class LatestAllFragment extends BaseFragment {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        mAdapter = new LastestAllAdapter(context,null, R.layout.lastest_all_item_1);
+        mLatestAllReferesh.setOnLoadingListener(this);
+        mAdapter = new LastestAllAdapter(context, null, R.layout.lastest_all_item_1);
         mLatestAllLv.setAdapter(mAdapter);
-        setupView(page,option.UP);
+        setupView(option.UP);
     }
 
-    private void setupView(long sPage, final option option) {
-        HttpUtils.getAsynString(HttpConstants.LASTEST_ALL_BEGIN + sPage + HttpConstants.LASTEST_ALL_END, new HttpUtils.ResultCallback() {
+    private void setupView(final option option) {
+        HttpUtils.getAsynString(HttpConstants.LASTEST_ALL_BEGIN + page + HttpConstants.LASTEST_ALL_END, new HttpUtils.ResultCallback() {
             @Override
             public void onFailure(Exception e) {
             }
@@ -52,6 +59,7 @@ public class LatestAllFragment extends BaseFragment {
             public void onFinish(String result) {
                 Gson gson = new Gson();
                 VideoRoot root = gson.fromJson(result, VideoRoot.class);
+                page=root.getInfo().getNp();
                 switch (option) {
                     case UP:
                         mAdapter.updateData(root.getList());
@@ -64,7 +72,24 @@ public class LatestAllFragment extends BaseFragment {
         });
     }
 
-    enum option{
-        UP,DOWM
+    @OnClick(R.id.latest_all_referesh)
+    public void onClick() {
+    }
+
+    @Override
+    public void onRefresh(AbsRefreshLayout listLoader) {
+        page=0;
+        setupView(option.UP);
+        mLatestAllReferesh.onLoadFinished();
+    }
+
+    @Override
+    public void onLoading(AbsRefreshLayout listLoader) {
+        setupView(option.DOWM);
+        mLatestAllReferesh.onLoadFinished();
+    }
+
+    enum option {
+        UP, DOWM
     }
 }
