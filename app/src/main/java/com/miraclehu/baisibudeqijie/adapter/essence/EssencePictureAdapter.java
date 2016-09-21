@@ -10,8 +10,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.leavessilent.mylibrary.adapters.UniversalAdapter;
+import com.leavessilent.mylibrary.utils.ScreenHelper;
 import com.miraclehu.baisibudeqijie.R;
+import com.miraclehu.baisibudeqijie.adapter.TopCommentAdapter;
 import com.miraclehu.baisibudeqijie.model.VideoList;
+import com.miraclehu.baisibudeqijie.widget.CommentListView;
 
 import java.util.List;
 
@@ -52,6 +55,7 @@ public class EssencePictureAdapter extends UniversalAdapter<VideoList> {
         CheckBox ding = (CheckBox) holder.getView(R.id.ding);
         TextView share = holder.getTextView(R.id.share);
         TextView common = holder.getTextView(R.id.common);
+        CommentListView commentListView = (CommentListView) holder.getView(R.id.picture_item_lv_comment);
 
         Glide.with(context).load(videoList.getU().getHeader().get(0))
                 .placeholder(R.mipmap.ic_launcher)
@@ -67,20 +71,38 @@ public class EssencePictureAdapter extends UniversalAdapter<VideoList> {
         data.setText(videoList.getPasstime());
         content.setText(videoList.getText());
 
-        Log.e(TAG, "onBindDataToView:       "+ videoList.getImage().getHeight() );
         if (videoList.getImage() != null) {
-            if (videoList.getImage().getHeight() > 5000) {
+            if (videoList.getImage().getHeight() > 4000) {
 
                 ViewGroup.LayoutParams layoutParams = picture.getLayoutParams();
-                layoutParams.height = 400;
+                layoutParams.height = ScreenHelper.dp2px(400);
                 picture.setLayoutParams(layoutParams);
                 fullpic.setVisibility(View.VISIBLE);
+                picture.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                Glide.with(context).load(videoList.getImage().getMedium().get(0))
+                        .placeholder(R.mipmap.post_loading_icon)
+                        .into(picture);
             } else {
                 ViewGroup.LayoutParams layoutParams = picture.getLayoutParams();
+                Log.e(TAG, "onBindDataToView: " + picture.getWidth());
                 layoutParams.height = picture.getWidth() * videoList.getImage().getHeight() / videoList.getImage().getWidth();
                 picture.setLayoutParams(layoutParams);
                 fullpic.setVisibility(View.GONE);
+                picture.setScaleType(ImageView.ScaleType.FIT_XY);
+                Glide.with(context).load(videoList.getImage().getMedium().get(0))
+                        .placeholder(R.mipmap.post_loading_icon)
+                        .into(picture);
             }
+        }
+        if (videoList.getGif() != null){
+            ViewGroup.LayoutParams layoutParams = picture.getLayoutParams();
+            layoutParams.height = picture.getWidth() * videoList.getGif().getHeight() / videoList.getGif().getWidth();
+            picture.setLayoutParams(layoutParams);
+            fullpic.setVisibility(View.GONE);
+            picture.setScaleType(ImageView.ScaleType.FIT_XY);
+            Glide.with(context).load(videoList.getGif().getImages().get(0))
+                    .placeholder(R.mipmap.post_loading_icon)
+                    .into(picture);
         }
         //隐藏loading图，需要再写
         loading.setVisibility(View.GONE);
@@ -88,6 +110,8 @@ public class EssencePictureAdapter extends UniversalAdapter<VideoList> {
         ding.setText(String.valueOf(videoList.getUp()));
         share.setText(String.valueOf(videoList.getForward()));
         common.setText(String.valueOf(videoList.getComment()));
-
+//        commentListView.setSelector(new );
+        TopCommentAdapter adapter = new TopCommentAdapter(context, videoList.getTop_comments(), R.layout.top_comment_item);
+        commentListView.setAdapter(adapter);
     }
 }

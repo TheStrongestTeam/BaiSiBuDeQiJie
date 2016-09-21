@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="#F3F2F3" />
+        android:layout_height="10dp"
+        android:background="#d6d3d6" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <FrameLayout
             android:layout_width="40dp"
@@ -30,6 +32,7 @@
                 android:layout_height="10dp"
                 android:layout_gravity="bottom|right"
                 android:src="@mipmap/bg_user_v" />
+
         </FrameLayout>
 
         <LinearLayout
@@ -66,16 +69,21 @@
         android:layout_marginTop="5dp"
         android:text="内容"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"/>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginTop="5dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
         <ImageView
             android:id="@+id/picture_item_picture"
             android:layout_width="match_parent"
-            android:layout_height="400dp" />
+            android:layout_height="400dp"
+            android:scaleType="centerCrop"/>
         <ImageView
             android:id="@+id/picture_item_loading"
             android:layout_width="wrap_content"
@@ -98,13 +106,18 @@
             android:layout_gravity="bottom"/>
     </FrameLayout>
 
-    <include layout="@layout/cai_ding_share_layout"/>
+    <include layout="@layout/cai_ding_share_layout"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"/>
 
-    <com.miraclehu.baisibudeqijie.widget.CommonListView
-        android:id="@+id/picture_item_lv_common"
+    <com.miraclehu.baisibudeqijie.widget.CommentListView
+        android:id="@+id/picture_item_lv_comment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </com.miraclehu.baisibudeqijie.widget.CommonListView>
-
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#d6d3d6">
+    </com.miraclehu.baisibudeqijie.widget.CommentListView>
 
 </LinearLayout>

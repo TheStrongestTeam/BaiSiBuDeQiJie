@@ -1,5 +1,7 @@
 package com.miraclehu.baisibudeqijie.model;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2016/9/20 0020.
  */
@@ -19,13 +21,14 @@ public class VideoList {
     private Video video;
     private Image image;
     private Gif gif;
+    private List<Commenter> top_comments;
 
-    public Gif getGif() {
-        return gif;
+    public List<Commenter> getTop_comments() {
+        return top_comments;
     }
 
-    public void setGif(Gif gif) {
-        this.gif = gif;
+    public void setTop_comments(List<Commenter> top_comments) {
+        this.top_comments = top_comments;
     }
 
     public Image getImage() {
@@ -138,5 +141,13 @@ public class VideoList {
 
     public void setVideo(Video video) {
         this.video = video;
+    }
+
+    public Gif getGif() {
+        return gif;
+    }
+
+    public void setGif(Gif gif) {
+        this.gif = gif;
     }
 }
