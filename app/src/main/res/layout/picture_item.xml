@@ -77,12 +77,14 @@
             android:layout_width="match_parent"
             android:layout_height="300dp" />
         <ImageView
+            android:id="@+id/picture_item_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
             android:src="@mipmap/post_loading_icon"/>
         <TextView
+            android:id="@+id/picture_item_fullpic"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#aa000000"
@@ -95,6 +97,14 @@
             android:paddingRight="80dp"
             android:layout_gravity="bottom"/>
     </FrameLayout>
+
+    <include layout="@layout/cai_ding_share_layout"/>
+
+    <com.miraclehu.baisibudeqijie.wedgit.CommonListView
+        android:id="@+id/picture_item_lv_common"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.miraclehu.baisibudeqijie.wedgit.CommonListView>
 
 
 </LinearLayout>

@@ -17,6 +17,15 @@ public class VideoList {
     private String type;
     private U u;
     private Video video;
+    private Image image;
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
 
     public int getStatus() {
         return status;
