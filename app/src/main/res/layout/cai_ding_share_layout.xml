@@ -30,7 +30,7 @@
         android:text="00"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:drawableLeft="@mipmap/showbig_bottom_share"/>
+        android:drawableLeft="@mipmap/forward"/>
     <TextView
         android:id="@+id/common"
         android:layout_width="0dp"
@@ -41,5 +41,5 @@
         android:gravity="center_vertical"
         android:paddingRight="20dp"
         android:paddingLeft="20dp"
-        android:drawableLeft="@mipmap/showbig_bottom_comment"/>
+        android:drawableLeft="@mipmap/commend"/>
 </LinearLayout>

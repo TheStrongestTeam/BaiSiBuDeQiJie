@@ -3,16 +3,25 @@ package com.miraclehu.baisibudeqijie.ui.fragment.latest;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.leavessilent.mylibrary.utils.HttpUtils;
 import com.miraclehu.baisibudeqijie.R;
 import com.miraclehu.baisibudeqijie.adapter.latest.LastestAllAdapter;
 import com.miraclehu.baisibudeqijie.common.HttpConstants;
+import com.miraclehu.baisibudeqijie.model.VideoList;
 import com.miraclehu.baisibudeqijie.model.VideoRoot;
 import com.miraclehu.baisibudeqijie.ui.fragment.BaseFragment;
 
@@ -26,15 +35,19 @@ import cn.appsdream.nestrefresh.normalstyle.NestRefreshLayout;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LatestAllFragment extends BaseFragment implements OnPullListener {
+public class LatestAllFragment extends BaseFragment implements OnPullListener, LastestAllAdapter.onItemClickListener, View.OnTouchListener {
 
 
+    private static final String TAG = LatestAllFragment.class.getCanonicalName();
     @BindView(R.id.latest_all_lv)
     ListView mLatestAllLv;
     @BindView(R.id.latest_all_referesh)
     NestRefreshLayout mLatestAllReferesh;
     private LastestAllAdapter mAdapter;
     private long page = 0;
+    private PopupWindow mPopupWindow;
+    private View mVideoPopLayout;
+    private ImageView mVideoPopThumbnail;
 
     @Override
     public int getLayoutResId() {
@@ -47,6 +60,7 @@ public class LatestAllFragment extends BaseFragment implements OnPullListener {
         mAdapter = new LastestAllAdapter(context, null, R.layout.lastest_all_item_1);
         mLatestAllLv.setAdapter(mAdapter);
         setupView(option.UP);
+        mAdapter.setListener(this);
     }
 
     private void setupView(final option option) {
@@ -59,7 +73,7 @@ public class LatestAllFragment extends BaseFragment implements OnPullListener {
             public void onFinish(String result) {
                 Gson gson = new Gson();
                 VideoRoot root = gson.fromJson(result, VideoRoot.class);
-                page=root.getInfo().getNp();
+                page = root.getInfo().getNp();
                 switch (option) {
                     case UP:
                         mAdapter.updateData(root.getList());
@@ -68,26 +82,78 @@ public class LatestAllFragment extends BaseFragment implements OnPullListener {
                         mAdapter.addData(root.getList());
                         break;
                 }
+                mLatestAllReferesh.onLoadFinished();
             }
         });
     }
 
-    @OnClick(R.id.latest_all_referesh)
-    public void onClick() {
-    }
-
     @Override
     public void onRefresh(AbsRefreshLayout listLoader) {
-        page=0;
+        page = 0;
         setupView(option.UP);
-        mLatestAllReferesh.onLoadFinished();
     }
 
     @Override
     public void onLoading(AbsRefreshLayout listLoader) {
         setupView(option.DOWM);
-        mLatestAllReferesh.onLoadFinished();
     }
+
+    //--------------------接口回调函数---------------------------
+    @Override
+    public void onItemClick(View v, VideoList item,View image) {
+        switch (v.getId()) {
+            case R.id.all_item_play:
+                if (mPopupWindow == null) {
+                    //弹出popupWindow
+                    View pop = LayoutInflater.from(context).inflate(R.layout.video_pop, null);
+                    mVideoPopLayout = pop.findViewById(R.id.video_pop_layout);
+                    mVideoPopThumbnail = ((ImageView) pop.findViewById(R.id.video_pop_thumbnail));
+                    this.mPopupWindow = new PopupWindow(pop);
+                    DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+                    int widthPixels = displayMetrics.widthPixels;
+                    int heightPixels = displayMetrics.heightPixels;
+                    mPopupWindow.setWidth(widthPixels);
+                    mPopupWindow.setHeight(heightPixels);
+                }
+                popLoadData(item);
+                mPopupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+                //设置点击监听
+                mVideoPopLayout.setOnTouchListener(this);
+                break;
+        }
+    }
+
+    private void popLoadData(VideoList item) {
+//        //获取视频封面图的位置
+//        int imageWidth = image.getWidth();
+//        int imageHeight = image.getHeight();
+//        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) image.getLayoutParams();
+//        int topMargin = layoutParams.topMargin;
+//
+//        //设置popupWindow图片位置  大小
+//        ViewGroup.LayoutParams params = mVideoPopThumbnail.getLayoutParams();
+//        params.width=imageWidth;
+//        params.height=imageHeight;
+        Log.e(TAG, "onItemClick: "+item.getVideo().getThumbnail().get(0) );
+        Glide.with(context).load(item.getVideo().getThumbnail().get(0)).into(mVideoPopThumbnail);
+    }
+
+    //-------------啪啪啪window点击监听回调--------------------------------
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (v.getId()) {
+            case R.id.video_pop_layout:
+                switch (event.getAction()) {
+                    //滑动时关闭pupupWindow
+                    case MotionEvent.ACTION_MOVE:
+                        mPopupWindow.dismiss();
+                        break;
+                }
+                break;
+        }
+        return false;
+    }
+
 
     enum option {
         UP, DOWM

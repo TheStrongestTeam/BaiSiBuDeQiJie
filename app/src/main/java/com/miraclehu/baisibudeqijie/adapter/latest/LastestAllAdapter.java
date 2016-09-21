@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +24,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 /**
  * Created by Administrator on 2016/9/20 0020.
  */
-public class LastestAllAdapter extends SingleBaseAdapter<VideoList> {
+public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements View.OnClickListener {
     private static final String TAG = LastestAllAdapter.class.getSimpleName();
     private ImageView mVip;
     private ImageView mV;
@@ -33,6 +35,17 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> {
     private TextView mText;
     private ImageView mThumbnail;
     private View mLayoutVideo;
+    private ImageView mPlay;
+    private View mLayoutPlay;
+    private CheckBox mCai;
+    private CheckBox mDing;
+    private TextView mShare;
+    private TextView mCommen;
+    private onItemClickListener listener;
+
+    public void setListener(onItemClickListener listener) {
+        this.listener = listener;
+    }
 
     public LastestAllAdapter(Context context, List<VideoList> data, int layoutId) {
         super(context, data, layoutId);
@@ -50,6 +63,13 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> {
         mText = ((TextView) holder.getView(R.id.all_item_text));
         mThumbnail = ((ImageView) holder.getView(R.id.all_item_thumbnail));
         mLayoutVideo = holder.getView(R.id.all_item_layout_video);
+        mPlay = ((ImageView) holder.getView(R.id.all_item_play));
+        mPlay.setOnClickListener(this);
+        mLayoutPlay = holder.getView(R.id.linearLayout);
+        mCai = ((CheckBox) holder.getView(R.id.cai));
+        mDing = ((CheckBox) holder.getView(R.id.ding));
+        mShare = ((TextView) holder.getView(R.id.share));
+        mCommen = ((TextView) holder.getView(R.id.common));
         //判断是否为vip  如果是，设置红色名字，带黄钻图案
         if (item.getU().is_vip()) {
             mName.setTextColor(Color.RED);
@@ -76,6 +96,7 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> {
         //判断是否是video
         if (item.getVideo() != null) {
             //设置video预览图片
+            mLayoutPlay.setVisibility(View.VISIBLE);
             mLayoutVideo.setVisibility(View.VISIBLE);
             ViewGroup.LayoutParams params = mLayoutVideo.getLayoutParams();
             params.height = item.getVideo().getHeight();
@@ -83,9 +104,11 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> {
             layoutParams.height = item.getVideo().getHeight();
             layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
             Glide.with(mContext).load(item.getVideo().getThumbnail().get(0)).into(mThumbnail);
+            mPlay.setTag(R.id.position,getPosition());
         } else
         //判断是否是Gif
         if (item.getGif() != null) {
+            mLayoutPlay.setVisibility(View.GONE);
             mLayoutVideo.setVisibility(View.VISIBLE);
             ViewGroup.LayoutParams params = mLayoutVideo.getLayoutParams();
             params.height=item.getGif().getHeight();
@@ -96,6 +119,7 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> {
         } else
         //判断是否是image
         if (item.getImage() != null) {
+            mLayoutPlay.setVisibility(View.GONE);
             int width = mThumbnail.getWidth();
             int imageHeight = item.getImage().getHeight();
             int imageWidth = item.getImage().getWidth();
@@ -114,6 +138,24 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> {
         } else {
             mLayoutVideo.setVisibility(View.GONE);
         }
-        //
+        //设置 踩 顶 分享 评论
+        mCai.setText(String.valueOf(item.getDown()));
+        mDing.setText(String.valueOf(item.getUp()));
+        mShare.setText(String.valueOf(item.getForward()));
+        mCommen.setText(String.valueOf(item.getComment()));
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.all_item_play:
+                listener.onItemClick(v,getItem(((int) v.getTag(R.id.position))),mThumbnail);
+                break;
+        }
+    }
+
+    public interface onItemClickListener{
+        void onItemClick(View v,VideoList item,View image);
     }
 }
