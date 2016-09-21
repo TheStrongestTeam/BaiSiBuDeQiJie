@@ -54,7 +54,7 @@ public class LatestAllFragment extends BaseFragment {
                 VideoRoot root = gson.fromJson(result, VideoRoot.class);
                 switch (option) {
                     case UP:
-                        mAdapter.updataData(root.getList());
+                        mAdapter.updateData(root.getList());
                         break;
                     case DOWM:
                         mAdapter.addData(root.getList());
