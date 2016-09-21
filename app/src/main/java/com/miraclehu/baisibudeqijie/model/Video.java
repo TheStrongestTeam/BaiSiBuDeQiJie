@@ -11,6 +11,15 @@ public class Video {
     private int width;
     private List<String>video;
     private List<String>download;
+    private List<String>thumbnail;
+
+    public List<String> getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(List<String> thumbnail) {
+        this.thumbnail = thumbnail;
+    }
 
     public int getPlayfcount() {
         return playfcount;
