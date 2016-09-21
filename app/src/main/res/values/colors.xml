@@ -6,4 +6,6 @@
 
     <color name="titleBackgroundColor">#FF2D55</color>
     <color name="title">#FF2C55</color>
+
+    <color name="jokeTextColor">#e716a2ff</color>
 </resources>
