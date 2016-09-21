@@ -18,6 +18,7 @@ public class VideoList {
     private U u;
     private Video video;
     private Image image;
+    private Gif gif;
 
     public Image getImage() {
         return image;
