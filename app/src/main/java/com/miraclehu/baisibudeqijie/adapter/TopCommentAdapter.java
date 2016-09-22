@@ -19,9 +19,10 @@ import java.util.List;
 /**
  * Created by user on 2016/9/21.
  */
-public class TopCommentAdapter extends SingleBaseAdapter<Commenter>{
+public class TopCommentAdapter extends SingleBaseAdapter<Commenter> {
 
     private Context context;
+
     public TopCommentAdapter(Context context, List<Commenter> data, int layoutId) {
         super(context, data, layoutId);
         this.context = context;
@@ -42,7 +43,7 @@ public class TopCommentAdapter extends SingleBaseAdapter<Commenter>{
             public void onClick(View widget) {
                 Toast.makeText(context, item.getU().getName(), Toast.LENGTH_SHORT).show();
             }
-        },0,item.getU().getName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }, 0, item.getU().getName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         view.setText(spannableString);
         view.append(":" + item.getContent());
     }
