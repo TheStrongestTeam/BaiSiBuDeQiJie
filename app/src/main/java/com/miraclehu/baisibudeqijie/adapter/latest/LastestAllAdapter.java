@@ -2,19 +2,15 @@ package com.miraclehu.baisibudeqijie.adapter.latest;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.leavessilent.mylibrary.adapters.MultipleBaseAdapter;
 import com.leavessilent.mylibrary.adapters.SingleBaseAdapter;
 import com.miraclehu.baisibudeqijie.R;
-import com.miraclehu.baisibudeqijie.model.Video;
 import com.miraclehu.baisibudeqijie.model.VideoList;
 
 import java.util.List;
@@ -24,7 +20,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 /**
  * Created by Administrator on 2016/9/20 0020.
  */
-public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements View.OnClickListener {
+public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements View.OnClickListener{
     private static final String TAG = LastestAllAdapter.class.getSimpleName();
     private ImageView mVip;
     private ImageView mV;
@@ -43,7 +39,6 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
     private TextView mCommen;
     private onItemClickListener listener;
     private View mViewPlay;
-
     public void setListener(onItemClickListener listener) {
         this.listener = listener;
     }
@@ -160,7 +155,6 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
                 break;
         }
     }
-
     public interface onItemClickListener{
         void onItemClick(View v,VideoList item);
     }

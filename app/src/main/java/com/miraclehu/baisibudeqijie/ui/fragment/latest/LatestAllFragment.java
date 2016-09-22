@@ -107,22 +107,22 @@ public class LatestAllFragment extends BaseFragment implements OnPullListener, L
     public void onItemClick(View v, VideoList item) {
         switch (v.getId()) {
             case R.id.all_item_view_play:
-                if (mPopupWindow == null) {
-                    //弹出popupWindow
-                    View pop = LayoutInflater.from(context).inflate(R.layout.video_pop, null);
-                    mVideoPopLayout = pop.findViewById(R.id.video_pop_layout);
-                    mVideoPopThumbnail = ((ImageView) pop.findViewById(R.id.video_pop_thumbnail));
-                    this.mPopupWindow = new PopupWindow(pop);
-                    DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-                    int widthPixels = displayMetrics.widthPixels;
-                    int heightPixels = displayMetrics.heightPixels;
-                    mPopupWindow.setWidth(widthPixels);
-                    mPopupWindow.setHeight(heightPixels);
-                }
-                popLoadData(v,item);
-                mPopupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-                //设置点击监听
-                mVideoPopLayout.setOnTouchListener(this);
+//                if (mPopupWindow == null) {
+//                    //弹出popupWindow
+//                    View pop = LayoutInflater.from(context).inflate(R.layout.video_pop, null);
+//                    mVideoPopLayout = pop.findViewById(R.id.video_pop_layout);
+//                    mVideoPopThumbnail = ((ImageView) pop.findViewById(R.id.video_pop_thumbnail));
+//                    this.mPopupWindow = new PopupWindow(pop);
+//                    DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+//                    int widthPixels = displayMetrics.widthPixels;
+//                    int heightPixels = displayMetrics.heightPixels;
+//                    mPopupWindow.setWidth(widthPixels);
+//                    mPopupWindow.setHeight(heightPixels);
+//                }
+//                popLoadData(v,item);
+//                mPopupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+//                //设置点击监听
+//                mVideoPopLayout.setOnTouchListener(this);
                 break;
         }
     }
@@ -148,9 +148,6 @@ public class LatestAllFragment extends BaseFragment implements OnPullListener, L
         layoutParams.width=width;
         //设置顶端距离
         mVideoPopThumbnail.setY(location[1]-result);
-//        ViewGroup.MarginLayoutParams mVideoPopThumbnailLayoutParams = (ViewGroup.MarginLayoutParams) mVideoPopThumbnail.getLayoutParams();
-//        int px = ScreenHelper.dp2px(5);
-//        mVideoPopThumbnailLayoutParams.setMargins(px,topMargin,px,bottomMargin);
         Glide.with(context).load(item.getVideo().getThumbnail().get(0)).into(mVideoPopThumbnail);
     }
 
