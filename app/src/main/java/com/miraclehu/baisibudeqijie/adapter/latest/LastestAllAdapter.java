@@ -6,15 +6,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.leavessilent.mylibrary.adapters.MultipleBaseAdapter;
 import com.leavessilent.mylibrary.adapters.SingleBaseAdapter;
+import com.leavessilent.mylibrary.utils.ScreenHelper;
 import com.miraclehu.baisibudeqijie.R;
-import com.miraclehu.baisibudeqijie.model.Video;
 import com.miraclehu.baisibudeqijie.model.VideoList;
 
 import java.util.List;
@@ -24,7 +22,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 /**
  * Created by Administrator on 2016/9/20 0020.
  */
-public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements View.OnClickListener {
+public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements View.OnClickListener{
     private static final String TAG = LastestAllAdapter.class.getSimpleName();
     private ImageView mVip;
     private ImageView mV;
@@ -43,7 +41,6 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
     private TextView mCommen;
     private onItemClickListener listener;
     private View mViewPlay;
-
     public void setListener(onItemClickListener listener) {
         this.listener = listener;
     }
@@ -95,21 +92,42 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
         mPasstime.setText(item.getPasstime());
         //设置标题text
         mText.setText(item.getText());
+        //获取屏幕的宽度
+        int screenWidth = ScreenHelper.getScreenWidth();
         //判断是否是video
         if (item.getVideo() != null) {
             //设置video预览图片
             mLayoutPlay.setVisibility(View.VISIBLE);
             mLayoutVideo.setVisibility(View.VISIBLE);
-            int width = mThumbnail.getWidth();
+            ViewGroup.LayoutParams layoutParams = mLayoutVideo.getLayoutParams();
+            ViewGroup.LayoutParams viewParams = mThumbnail.getLayoutParams();
+
+            //获取要显示图片的高度
             int imageHeight = item.getVideo().getHeight();
+            //获取要显示图片的宽度
             int imageWidth = item.getVideo().getWidth();
-            int height = width * imageHeight / imageWidth;
-            ViewGroup.LayoutParams params = mLayoutVideo.getLayoutParams();
-            params.height= height;
-            ViewGroup.LayoutParams layoutParams = mThumbnail.getLayoutParams();
-            layoutParams.height = height;
-            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int percentHeight = screenWidth * imageHeight / imageWidth;
+            int percentWidth = screenWidth * imageHeight / imageWidth;
             Glide.with(mContext).load(item.getVideo().getThumbnail().get(0)).into(mThumbnail);
+            if (imageHeight==imageWidth) {
+                layoutParams.height=screenWidth;
+                layoutParams.width=screenWidth;
+                viewParams.height=screenWidth;
+                viewParams.width=screenWidth;
+            }
+            if (imageWidth>imageHeight) {
+                layoutParams.height=percentHeight;
+                layoutParams.width=screenWidth;
+                viewParams.height=percentHeight;
+                viewParams.width=screenWidth;
+            }
+            if(imageWidth<imageHeight){
+                layoutParams.height=screenWidth;
+                layoutParams.width=screenWidth;
+                viewParams.height=screenWidth;
+                viewParams.width=percentWidth;
+            }
+
             mViewPlay.setTag(R.id.position,getPosition());
         } else
         //判断是否是Gif
@@ -160,7 +178,6 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
                 break;
         }
     }
-
     public interface onItemClickListener{
         void onItemClick(View v,VideoList item);
     }

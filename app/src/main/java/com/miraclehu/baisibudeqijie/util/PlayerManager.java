@@ -24,7 +24,9 @@ public class PlayerManager {
     private static PlayerManager getInstance() {
         if (sManager == null) {
             synchronized (PlayerManager.class) {
-                sManager = new PlayerManager();
+                if (sManager == null) {
+                    sManager = new PlayerManager();
+                }
             }
         }
         return sManager;
