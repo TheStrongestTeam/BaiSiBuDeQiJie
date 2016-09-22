@@ -63,15 +63,14 @@
         android:id="@+id/all_item_layout_video"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="#d1d1d1"
         android:clickable="true"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp">
         <ImageView
             android:id="@+id/all_item_thumbnail"
+            android:layout_centerHorizontal="true"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:scaleType="fitXY"/>
+            android:layout_height="match_parent"/>
 
         <ImageView
             android:id="@+id/all_item_loading_icon"
