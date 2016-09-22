@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Administrator on 2016/9/20 0020.
  */
 public class U {
-    private List<String>header;
+    private List<String> header;
     private boolean is_v;
     private int uid;
     private boolean is_vip;
