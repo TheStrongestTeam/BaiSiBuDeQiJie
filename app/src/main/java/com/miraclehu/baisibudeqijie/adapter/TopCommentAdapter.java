@@ -35,7 +35,7 @@ public class TopCommentAdapter extends SingleBaseAdapter<Commenter>{
             @Override
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
-                ds.setColor(Color.BLUE);
+                ds.setColor(Color.parseColor("#e716a2ff"));
             }
 
             @Override

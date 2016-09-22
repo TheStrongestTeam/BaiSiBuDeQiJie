@@ -1,10 +1,12 @@
 package com.miraclehu.baisibudeqijie.ui.fragment.latest;
 
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -17,7 +19,9 @@ import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.leavessilent.mylibrary.MyLibrary;
 import com.leavessilent.mylibrary.utils.HttpUtils;
+import com.leavessilent.mylibrary.utils.ScreenHelper;
 import com.miraclehu.baisibudeqijie.R;
 import com.miraclehu.baisibudeqijie.adapter.latest.LastestAllAdapter;
 import com.miraclehu.baisibudeqijie.common.HttpConstants;
@@ -100,9 +104,9 @@ public class LatestAllFragment extends BaseFragment implements OnPullListener, L
 
     //--------------------接口回调函数---------------------------
     @Override
-    public void onItemClick(View v, VideoList item,View image) {
+    public void onItemClick(View v, VideoList item) {
         switch (v.getId()) {
-            case R.id.all_item_play:
+            case R.id.all_item_view_play:
                 if (mPopupWindow == null) {
                     //弹出popupWindow
                     View pop = LayoutInflater.from(context).inflate(R.layout.video_pop, null);
@@ -115,26 +119,38 @@ public class LatestAllFragment extends BaseFragment implements OnPullListener, L
                     mPopupWindow.setWidth(widthPixels);
                     mPopupWindow.setHeight(heightPixels);
                 }
-                popLoadData(item);
+                popLoadData(v,item);
                 mPopupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
                 //设置点击监听
                 mVideoPopLayout.setOnTouchListener(this);
                 break;
         }
     }
+//------------------啪啪啪加载数据--------------------------------------
+    private void popLoadData(View view,VideoList item) {
+        //获取view的宽和高 以及距离顶端的距离
+        int height = view.getHeight();
+        int width = view.getWidth();
+        //获取view的坐标
+        int [] location=new int[2];
+        view.getLocationOnScreen(location);
+        //获取屏幕高度
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        int height1 = display.getHeight();
+        //获取状态栏高度
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        int  result = getResources().getDimensionPixelSize(resourceId);
 
-    private void popLoadData(VideoList item) {
-//        //获取视频封面图的位置
-//        int imageWidth = image.getWidth();
-//        int imageHeight = image.getHeight();
-//        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) image.getLayoutParams();
-//        int topMargin = layoutParams.topMargin;
-//
-//        //设置popupWindow图片位置  大小
-//        ViewGroup.LayoutParams params = mVideoPopThumbnail.getLayoutParams();
-//        params.width=imageWidth;
-//        params.height=imageHeight;
-        Log.e(TAG, "onItemClick: "+item.getVideo().getThumbnail().get(0) );
+        Log.e(TAG, "popLoadData: "+location[1]+"==="+height1+"==="+result);
+        //设置要显示图片的view的宽和高
+        ViewGroup.LayoutParams layoutParams = mVideoPopThumbnail.getLayoutParams();
+        layoutParams.height=height;
+        layoutParams.width=width;
+        //设置顶端距离
+        mVideoPopThumbnail.setY(location[1]-result);
+//        ViewGroup.MarginLayoutParams mVideoPopThumbnailLayoutParams = (ViewGroup.MarginLayoutParams) mVideoPopThumbnail.getLayoutParams();
+//        int px = ScreenHelper.dp2px(5);
+//        mVideoPopThumbnailLayoutParams.setMargins(px,topMargin,px,bottomMargin);
         Glide.with(context).load(item.getVideo().getThumbnail().get(0)).into(mVideoPopThumbnail);
     }
 

@@ -42,6 +42,7 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
     private TextView mShare;
     private TextView mCommen;
     private onItemClickListener listener;
+    private View mViewPlay;
 
     public void setListener(onItemClickListener listener) {
         this.listener = listener;
@@ -64,12 +65,13 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
         mThumbnail = ((ImageView) holder.getView(R.id.all_item_thumbnail));
         mLayoutVideo = holder.getView(R.id.all_item_layout_video);
         mPlay = ((ImageView) holder.getView(R.id.all_item_play));
-        mPlay.setOnClickListener(this);
         mLayoutPlay = holder.getView(R.id.linearLayout);
         mCai = ((CheckBox) holder.getView(R.id.cai));
         mDing = ((CheckBox) holder.getView(R.id.ding));
         mShare = ((TextView) holder.getView(R.id.share));
         mCommen = ((TextView) holder.getView(R.id.common));
+        mViewPlay = holder.getView(R.id.all_item_view_play);
+        mViewPlay.setOnClickListener(this);
         //判断是否为vip  如果是，设置红色名字，带黄钻图案
         if (item.getU().is_vip()) {
             mName.setTextColor(Color.RED);
@@ -98,13 +100,17 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
             //设置video预览图片
             mLayoutPlay.setVisibility(View.VISIBLE);
             mLayoutVideo.setVisibility(View.VISIBLE);
+            int width = mThumbnail.getWidth();
+            int imageHeight = item.getVideo().getHeight();
+            int imageWidth = item.getVideo().getWidth();
+            int height = width * imageHeight / imageWidth;
             ViewGroup.LayoutParams params = mLayoutVideo.getLayoutParams();
-            params.height = item.getVideo().getHeight();
+            params.height= height;
             ViewGroup.LayoutParams layoutParams = mThumbnail.getLayoutParams();
-            layoutParams.height = item.getVideo().getHeight();
+            layoutParams.height = height;
             layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
             Glide.with(mContext).load(item.getVideo().getThumbnail().get(0)).into(mThumbnail);
-            mPlay.setTag(R.id.position,getPosition());
+            mViewPlay.setTag(R.id.position,getPosition());
         } else
         //判断是否是Gif
         if (item.getGif() != null) {
@@ -149,13 +155,13 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.all_item_play:
-                listener.onItemClick(v,getItem(((int) v.getTag(R.id.position))),mThumbnail);
+            case R.id.all_item_view_play:
+                listener.onItemClick(v,getItem(((int) v.getTag(R.id.position))));
                 break;
         }
     }
 
     public interface onItemClickListener{
-        void onItemClick(View v,VideoList item,View image);
+        void onItemClick(View v,VideoList item);
     }
 }

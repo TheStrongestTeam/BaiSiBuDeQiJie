@@ -97,6 +97,11 @@
                 android:padding="10dp"
                 android:src="@mipmap/video_play"/>
         </LinearLayout>
+        <View
+            android:id="@+id/all_item_view_play"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </RelativeLayout>
     <include layout="@layout/cai_ding_share_layout"/>
 </LinearLayout>

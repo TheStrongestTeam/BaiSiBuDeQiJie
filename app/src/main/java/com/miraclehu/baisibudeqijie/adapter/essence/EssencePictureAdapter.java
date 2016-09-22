@@ -1,11 +1,14 @@
 package com.miraclehu.baisibudeqijie.adapter.essence;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -27,6 +30,12 @@ public class EssencePictureAdapter extends UniversalAdapter<VideoList> {
 
     private static final String TAG = EssencePictureAdapter.class.getSimpleName();
     private Context context;
+    private OnItemClickListener listener;
+
+    public void setListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
     public EssencePictureAdapter(Context context, List<VideoList> data) {
         super(context, data);
         this.context = context;
@@ -56,6 +65,7 @@ public class EssencePictureAdapter extends UniversalAdapter<VideoList> {
         TextView share = holder.getTextView(R.id.share);
         TextView common = holder.getTextView(R.id.common);
         CommentListView commentListView = (CommentListView) holder.getView(R.id.picture_item_lv_comment);
+        commentListView.setSelector(new ColorDrawable(Color.TRANSPARENT));
 
         Glide.with(context).load(videoList.getU().getHeader().get(0))
                 .placeholder(R.mipmap.ic_launcher)
@@ -104,14 +114,34 @@ public class EssencePictureAdapter extends UniversalAdapter<VideoList> {
                     .placeholder(R.mipmap.post_loading_icon)
                     .into(picture);
         }
+
+        picture.setTag(R.id.picture_item_picture,position);
+        picture.setOnClickListener(this);
+
         //隐藏loading图，需要再写
         loading.setVisibility(View.GONE);
         cai.setText(String.valueOf(videoList.getDown()));
         ding.setText(String.valueOf(videoList.getUp()));
         share.setText(String.valueOf(videoList.getForward()));
         common.setText(String.valueOf(videoList.getComment()));
-//        commentListView.setSelector(new );
         TopCommentAdapter adapter = new TopCommentAdapter(context, videoList.getTop_comments(), R.layout.top_comment_item);
         commentListView.setAdapter(adapter);
+    }
+
+    public interface OnItemClickListener{
+
+        void onItemClick(View v,int position);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.picture_item_picture:
+                listener.onItemClick(v,((int) v.getTag(R.id.picture_item_picture)));
+                break;
+        }
+
+
     }
 }
