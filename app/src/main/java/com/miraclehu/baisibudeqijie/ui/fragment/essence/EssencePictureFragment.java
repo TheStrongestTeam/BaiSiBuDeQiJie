@@ -1,5 +1,6 @@
 package com.miraclehu.baisibudeqijie.ui.fragment.essence;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import com.miraclehu.baisibudeqijie.R;
 import com.miraclehu.baisibudeqijie.adapter.essence.EssencePictureAdapter;
 import com.miraclehu.baisibudeqijie.common.HttpConstants;
 import com.miraclehu.baisibudeqijie.model.VideoRoot;
+import com.miraclehu.baisibudeqijie.ui.PictureActivity;
 import com.miraclehu.baisibudeqijie.ui.fragment.BaseFragment;
 
 import butterknife.BindView;
@@ -26,7 +28,7 @@ import cn.appsdream.nestrefresh.normalstyle.NestRefreshLayout;
 /**
  * Created by user on 2016/9/20.
  */
-public class EssencePictureFragment extends BaseFragment implements OnPullListener {
+public class EssencePictureFragment extends BaseFragment implements OnPullListener, EssencePictureAdapter.OnItemClickListener {
     public static final String TAG = EssencePictureFragment.class.getSimpleName();
     @BindView(R.id.essence_picture_rv)
     RecyclerView essencePictureRv;
@@ -50,6 +52,7 @@ public class EssencePictureFragment extends BaseFragment implements OnPullListen
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         essencePictureRv.setLayoutManager(layoutManager);
         adapter = new EssencePictureAdapter(context, null);
+        adapter.setListener(this);
         essencePictureRv.setAdapter(adapter);
         setupView(State.DOWN);
     }
@@ -60,6 +63,16 @@ public class EssencePictureFragment extends BaseFragment implements OnPullListen
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    @Override
+    public void onItemClick(View v, int position) {
+        switch (v.getId()) {
+            case R.id.picture_item_picture:
+                Intent intent = new Intent(context, PictureActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
 
