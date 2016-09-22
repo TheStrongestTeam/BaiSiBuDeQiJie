@@ -2,13 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-
               android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="#d6d1d1"/>
+        android:background="#99e4e1e1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,12 +77,12 @@
 
     <include layout="@layout/cai_ding_share_layout"/>
 
-    <ListView
+    <com.miraclehu.baisibudeqijie.widget.CommentListView
         android:id="@+id/essence_joke_item_lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:visibility="gone"></ListView>
+        android:visibility="gone"></com.miraclehu.baisibudeqijie.widget.CommentListView>
 </LinearLayout>

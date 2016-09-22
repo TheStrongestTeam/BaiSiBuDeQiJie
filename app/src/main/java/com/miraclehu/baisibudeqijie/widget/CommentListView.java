@@ -9,11 +9,11 @@ import android.widget.ListView;
  */
 public class CommentListView extends ListView {
     public CommentListView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public CommentListView(Context context, AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public CommentListView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -26,6 +26,5 @@ public class CommentListView extends ListView {
         int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
                 MeasureSpec.AT_MOST);
         super.onMeasure(widthMeasureSpec, expandSpec);
-
     }
 }

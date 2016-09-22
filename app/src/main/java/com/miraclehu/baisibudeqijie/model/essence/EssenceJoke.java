@@ -19,6 +19,16 @@ public class EssenceJoke {
     private U u;
     private String passtime;
 
+    // 自定义的一个属性，控制是否显示全文
+    private boolean isFullText;
+
+    public boolean isFullText() {
+        return isFullText;
+    }
+
+    public void setFullText(boolean fullText) {
+        isFullText = fullText;
+    }
 
     public int getId() {
         return id;
