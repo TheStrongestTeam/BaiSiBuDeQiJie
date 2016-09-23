@@ -21,7 +21,7 @@ public class SQLiteOpenHelperManager {
         sHelper = new BaiSiBuDeQiJieSQLiteOpenHelper(context, DB_NAME, null, DB_VERSION);
     }
 
-    public static SQLiteOpenHelperManager getInstance(Context context) {
+    private static SQLiteOpenHelperManager getInstance(Context context) {
         if (sManager == null) {
             synchronized (SQLiteOpenHelperManager.class) {
                 if (sManager == null) {
@@ -33,7 +33,7 @@ public class SQLiteOpenHelperManager {
     }
 
 
-    public BaiSiBuDeQiJieSQLiteOpenHelper getsHelper() {
+    private BaiSiBuDeQiJieSQLiteOpenHelper getsHelper() {
         return sHelper;
     }
 
