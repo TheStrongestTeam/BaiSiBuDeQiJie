@@ -3,6 +3,7 @@ package com.miraclehu.baisibudeqijie;
 import android.app.Application;
 
 import com.leavessilent.mylibrary.MyLibrary;
+import com.miraclehu.baisibudeqijie.util.PlayerManager;
 
 
 /**

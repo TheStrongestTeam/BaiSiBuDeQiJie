@@ -28,6 +28,7 @@ import com.miraclehu.baisibudeqijie.common.HttpConstants;
 import com.miraclehu.baisibudeqijie.model.VideoList;
 import com.miraclehu.baisibudeqijie.model.VideoRoot;
 import com.miraclehu.baisibudeqijie.ui.fragment.BaseFragment;
+import com.miraclehu.baisibudeqijie.util.PlayerManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -107,6 +108,7 @@ public class LatestAllFragment extends BaseFragment implements OnPullListener, L
     public void onItemClick(View v, VideoList item) {
         switch (v.getId()) {
             case R.id.all_item_view_play:
+
 //                if (mPopupWindow == null) {
 //                    //弹出popupWindow
 //                    View pop = LayoutInflater.from(context).inflate(R.layout.video_pop, null);

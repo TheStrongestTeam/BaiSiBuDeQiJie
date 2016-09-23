@@ -2,7 +2,10 @@ package com.miraclehu.baisibudeqijie.adapter.latest;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.util.Log;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -14,6 +17,7 @@ import com.leavessilent.mylibrary.adapters.SingleBaseAdapter;
 import com.leavessilent.mylibrary.utils.ScreenHelper;
 import com.miraclehu.baisibudeqijie.R;
 import com.miraclehu.baisibudeqijie.model.VideoList;
+import com.miraclehu.baisibudeqijie.util.PlayerManager;
 
 import java.util.List;
 
@@ -22,7 +26,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 /**
  * Created by Administrator on 2016/9/20 0020.
  */
-public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements View.OnClickListener{
+public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements View.OnClickListener,MediaPlayer.OnPreparedListener {
     private static final String TAG = LastestAllAdapter.class.getSimpleName();
     private ImageView mVip;
     private ImageView mV;
@@ -41,6 +45,9 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
     private TextView mCommen;
     private onItemClickListener listener;
     private View mViewPlay;
+    private SurfaceView mSurface;
+    private SurfaceHolder mHolder;
+    private String url=null;
     public void setListener(onItemClickListener listener) {
         this.listener = listener;
     }
@@ -68,7 +75,11 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
         mShare = ((TextView) holder.getView(R.id.share));
         mCommen = ((TextView) holder.getView(R.id.common));
         mViewPlay = holder.getView(R.id.all_item_view_play);
+
         mViewPlay.setOnClickListener(this);
+
+        mSurface = (SurfaceView) holder.getView(R.id.all_item_surface);
+        mHolder = mSurface.getHolder();
         //判断是否为vip  如果是，设置红色名字，带黄钻图案
         if (item.getU().is_vip()) {
             mName.setTextColor(Color.RED);
@@ -97,11 +108,12 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
         //判断是否是video
         if (item.getVideo() != null) {
             //设置video预览图片
+            mThumbnail.setVisibility(View.VISIBLE);
             mLayoutPlay.setVisibility(View.VISIBLE);
             mLayoutVideo.setVisibility(View.VISIBLE);
             ViewGroup.LayoutParams layoutParams = mLayoutVideo.getLayoutParams();
             ViewGroup.LayoutParams viewParams = mThumbnail.getLayoutParams();
-
+            ViewGroup.LayoutParams surfaceViewLayoutParams = mSurface.getLayoutParams();
             //获取要显示图片的高度
             int imageHeight = item.getVideo().getHeight();
             //获取要显示图片的宽度
@@ -114,20 +126,26 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
                 layoutParams.width=screenWidth;
                 viewParams.height=screenWidth;
                 viewParams.width=screenWidth;
+                surfaceViewLayoutParams.width=screenWidth;
+                surfaceViewLayoutParams.height=screenWidth;
             }
             if (imageWidth>imageHeight) {
                 layoutParams.height=percentHeight;
                 layoutParams.width=screenWidth;
                 viewParams.height=percentHeight;
                 viewParams.width=screenWidth;
+                surfaceViewLayoutParams.height=percentHeight;
+                surfaceViewLayoutParams.width=screenWidth;
             }
             if(imageWidth<imageHeight){
                 layoutParams.height=screenWidth;
                 layoutParams.width=screenWidth;
                 viewParams.height=screenWidth;
                 viewParams.width=percentWidth;
+                surfaceViewLayoutParams.height=screenWidth;
+                surfaceViewLayoutParams.width=percentWidth;
             }
-
+            url=item.getVideo().getVideo().get(0);
             mViewPlay.setTag(R.id.position,getPosition());
         } else
         //判断是否是Gif
@@ -174,10 +192,26 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.all_item_view_play:
-                listener.onItemClick(v,getItem(((int) v.getTag(R.id.position))));
+//                listener.onItemClick(v,getItem(((int) v.getTag(R.id.position))));
+
+                    mThumbnail.setVisibility(View.GONE);
+                    PlayerManager.reset();
+                    PlayerManager.setDisplay(mHolder);
+                    PlayerManager.setDataUrl(url);
+                    PlayerManager.prepareAsyn();
+                    PlayerManager.setOnPreparedListener(this);
+
+
                 break;
         }
     }
+
+
+    @Override
+    public void onPrepared(MediaPlayer mp) {
+        PlayerManager.start();
+    }
+
     public interface onItemClickListener{
         void onItemClick(View v,VideoList item);
     }

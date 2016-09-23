@@ -13,6 +13,7 @@ import com.miraclehu.baisibudeqijie.ui.fragment.AttentionFragment;
 import com.miraclehu.baisibudeqijie.ui.fragment.essence.EssenceFragment;
 import com.miraclehu.baisibudeqijie.ui.fragment.latest.LatestFragment;
 import com.miraclehu.baisibudeqijie.ui.fragment.MyFragment;
+import com.miraclehu.baisibudeqijie.util.PlayerManager;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -37,13 +38,18 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     @Override
     public void initView(Bundle savedInstanceState) {
         mController.setOnCheckedChangeListener(this);
-
+        PlayerManager.init(this);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         mShowFragment = new EssenceFragment();
         transaction.add(R.id.container,mShowFragment,EssenceFragment.TAG);
         transaction.commit();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PlayerManager.release();
+    }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {

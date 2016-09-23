@@ -140,6 +140,9 @@ public class PlayerManager {
     public static void prepare() {
         getInstance()._prepare();
     }
+    public static void prepareAsyn(){
+        getInstance()._prepareAsyn();
+    }
 
     public static void stop() {
         getInstance()._stop();
