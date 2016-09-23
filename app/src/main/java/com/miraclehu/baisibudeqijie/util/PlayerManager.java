@@ -1,9 +1,9 @@
 package com.miraclehu.baisibudeqijie.util;
 
-import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.view.SurfaceHolder;
+import android.view.View;
 
 import java.io.IOException;
 
@@ -11,7 +11,6 @@ import java.io.IOException;
  * Created by hasee on 2016/9/22.
  */
 public class PlayerManager {
-    private static Context sContext;
     private MediaPlayer mPlayer;
 
     private static PlayerManager sManager;
@@ -83,7 +82,7 @@ public class PlayerManager {
     private void _setDataUrl(String url) {
         try {
             if (mPlayer != null)
-                mPlayer.setDataSource(sContext, Uri.parse(url));
+                mPlayer.setDataSource(url);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -96,8 +95,8 @@ public class PlayerManager {
         if (mPlayer != null) {
             if (mPlayer.isPlaying()) {
                 _stop();
-                mPlayer.reset();
             }
+            mPlayer.reset();
         }
     }
 
@@ -123,10 +122,6 @@ public class PlayerManager {
         return mPlayer;
     }
 
-    public static void init(Context context) {
-        sContext = context;
-    }
-
 
     // ---------------------------为外界提供的方法----------------------------------
     public static void start() {
@@ -140,7 +135,8 @@ public class PlayerManager {
     public static void prepare() {
         getInstance()._prepare();
     }
-    public static void prepareAsyn(){
+
+    public static void prepareAsyn() {
         getInstance()._prepareAsyn();
     }
 

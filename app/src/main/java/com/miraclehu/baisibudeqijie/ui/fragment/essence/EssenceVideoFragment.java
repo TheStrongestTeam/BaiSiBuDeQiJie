@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
+import com.leavessilent.mylibrary.adapters.UniversalAdapter;
 import com.leavessilent.mylibrary.utils.HttpUtils;
 import com.miraclehu.baisibudeqijie.R;
 import com.miraclehu.baisibudeqijie.adapter.essence.EssenceVideoAdapter;
@@ -47,6 +48,7 @@ public class EssenceVideoFragment extends BaseFragment {
         mRecyclerView.setAdapter(mAdapter);
 
         getDataFromInternet();
+
     }
 
     private void getDataFromInternet() {

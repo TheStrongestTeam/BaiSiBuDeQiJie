@@ -80,6 +80,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp">
 
+
             <SurfaceView
                 android:id="@+id/essence_video_item_surface_view"
                 android:layout_width="match_parent"
@@ -92,12 +93,19 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"/>
 
+
             <ImageView
                 android:id="@+id/essence_video_item_play"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
                 android:background="@mipmap/play_video_pressed"/>
+
+            <ProgressBar
+                android:id="@+id/essence_video_item_pb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
 
 
         </FrameLayout>
