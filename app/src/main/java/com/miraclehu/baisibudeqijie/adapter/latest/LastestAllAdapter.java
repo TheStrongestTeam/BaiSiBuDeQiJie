@@ -75,6 +75,7 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
         mShare = ((TextView) holder.getView(R.id.share));
         mCommen = ((TextView) holder.getView(R.id.common));
         mViewPlay = holder.getView(R.id.all_item_view_play);
+
         mViewPlay.setOnClickListener(this);
 
         mSurface = (SurfaceView) holder.getView(R.id.all_item_surface);
@@ -191,7 +192,16 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.all_item_view_play:
-                listener.onItemClick(v,getItem(((int) v.getTag(R.id.position))));
+//                listener.onItemClick(v,getItem(((int) v.getTag(R.id.position))));
+
+                    mThumbnail.setVisibility(View.GONE);
+                    PlayerManager.reset();
+                    PlayerManager.setDisplay(mHolder);
+                    PlayerManager.setDataUrl(url);
+                    PlayerManager.prepareAsyn();
+                    PlayerManager.setOnPreparedListener(this);
+
+
                 break;
         }
     }
@@ -199,7 +209,7 @@ public class LastestAllAdapter extends SingleBaseAdapter<VideoList> implements V
 
     @Override
     public void onPrepared(MediaPlayer mp) {
-
+        PlayerManager.start();
     }
 
     public interface onItemClickListener{
