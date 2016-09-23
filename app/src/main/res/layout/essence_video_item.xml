@@ -21,13 +21,13 @@
             android:layout_marginLeft="10dp">
 
             <ImageView
-                android:id="@+id/all_item_header"
+                android:id="@+id/essence_video_item_icon"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:src="@mipmap/ic_launcher"/>
 
             <ImageView
-                android:id="@+id/all_item_is_v"
+                android:id="@+id/essence_video_item_is_v"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_gravity="right|bottom"
@@ -40,7 +40,7 @@
             android:layout_marginLeft="10dp">
 
             <TextView
-                android:id="@+id/all_item_name"
+                android:id="@+id/essence_video_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:gravity="center_vertical"
@@ -48,7 +48,7 @@
                 android:textSize="12sp"/>
 
             <TextView
-                android:id="@+id/all_item_passtime"
+                android:id="@+id/essence_video_item_passtime"
                 android:layout_width="wrap_content"
                 android:layout_height="15dp"
                 android:layout_below="@+id/all_item_name"
@@ -87,15 +87,15 @@
                 android:layout_gravity="center"/>
 
             <ImageView
-                android:id="@+id/essence_video_item_image"
+                android:id="@+id/essence_video_item_preview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"/>
 
             <ImageView
                 android:id="@+id/essence_video_item_play"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_gravity="center"
                 android:background="@mipmap/play_video_pressed"/>
 
