@@ -101,12 +101,22 @@ public class PlayerManager {
         }
     }
 
+    /**
+     * 同步准备
+     */
     private void _prepare() {
         try {
             mPlayer.prepare();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 异步准备
+     */
+    private void _prepareAsyn() {
+        mPlayer.prepareAsync();
     }
 
     private MediaPlayer getPlayer() {
