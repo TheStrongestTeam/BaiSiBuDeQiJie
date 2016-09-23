@@ -102,7 +102,6 @@ public class EssenceVideoAdapter extends UniversalAdapter<VideoList> {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.essence_video_item_play:
-
                 break;
         }
     }
