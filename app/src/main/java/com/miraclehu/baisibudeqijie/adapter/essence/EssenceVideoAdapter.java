@@ -2,8 +2,6 @@ package com.miraclehu.baisibudeqijie.adapter.essence;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -19,7 +17,6 @@ import com.miraclehu.baisibudeqijie.R;
 import com.miraclehu.baisibudeqijie.model.U;
 import com.miraclehu.baisibudeqijie.model.Video;
 import com.miraclehu.baisibudeqijie.model.VideoList;
-import com.miraclehu.baisibudeqijie.util.PlayerManager;
 
 import java.util.List;
 
@@ -54,13 +51,14 @@ public class EssenceVideoAdapter extends UniversalAdapter<VideoList> {
 
     @Override
     protected void onBindDataToView(RecyclerViewHolder holder, VideoList videoList, final int position) {
-
         ImageView icon = holder.getImageView(R.id.essence_video_item_icon);
         TextView name = holder.getTextView(R.id.essence_video_item_name);
         ImageView isV = holder.getImageView(R.id.essence_video_item_is_v);
         TextView time = holder.getTextView(R.id.essence_video_item_passtime);
         TextView title = holder.getTextView(R.id.essence_video_item_title);
-        final ImageView preview = holder.getImageView(R.id.essence_video_item_preview);
+        ImageView preview = holder.getImageView(R.id.essence_video_item_preview);
+
+
         SurfaceView surfaceView = (SurfaceView) holder.getView(R.id.essence_video_item_surface_view);
         final SurfaceHolder surfaceHolder = surfaceView.getHolder();
 
@@ -68,27 +66,7 @@ public class EssenceVideoAdapter extends UniversalAdapter<VideoList> {
         pb.setVisibility(View.GONE);
         ImageView play = holder.getImageView(R.id.essence_video_item_play);
 
-        play.setTag(position);
         play.setVisibility(View.VISIBLE);
-        play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.setVisibility(View.GONE);
-                pb.setVisibility(View.VISIBLE);
-                PlayerManager.reset();
-                PlayerManager.setDataUrl(mData.get(position).getVideo().getVideo().get(0));
-                PlayerManager.setDisplay(surfaceHolder);
-                PlayerManager.prepareAsyn();
-                PlayerManager.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mp) {
-                        preview.setVisibility(View.GONE);
-                        pb.setVisibility(View.GONE);
-                        PlayerManager.start();
-                    }
-                });
-            }
-        });
 
         TextView down = holder.getTextView(R.id.cai);
         TextView up = holder.getTextView(R.id.ding);
