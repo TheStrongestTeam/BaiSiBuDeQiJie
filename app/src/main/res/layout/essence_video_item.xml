@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:orientation="vertical">
 
     <View
@@ -51,7 +51,7 @@
                 android:id="@+id/essence_video_item_passtime"
                 android:layout_width="wrap_content"
                 android:layout_height="15dp"
-                android:layout_below="@+id/all_item_name"
+                android:layout_below="@id/essence_video_item_name"
                 android:gravity="center_vertical"
                 android:text="time"
                 android:textSize="10sp"/>
@@ -103,5 +103,7 @@
         </FrameLayout>
     </FrameLayout>
 
+    <include
+        layout="@layout/cai_ding_share_layout"/>
 
 </LinearLayout>

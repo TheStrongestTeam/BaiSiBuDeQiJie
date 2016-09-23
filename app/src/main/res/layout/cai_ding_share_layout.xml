@@ -1,45 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:id="@+id/cai_ding_share">
+              android:id="@+id/cai_ding_share"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:orientation="horizontal">
 
     <CheckBox
         android:id="@+id/cai"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="50dp"
-        android:text="00"
+        android:layout_weight="1"
         android:button="@null"
         android:drawableLeft="@drawable/cai_bg"
-        android:paddingLeft="20dp"/>
+        android:paddingLeft="20dp"
+        android:text="00"/>
+
     <CheckBox
         android:id="@+id/ding"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="50dp"
-        android:text="00"
+        android:layout_weight="1"
         android:button="@null"
+        android:drawableLeft="@drawable/ding_bg"
         android:paddingLeft="20dp"
-        android:drawableLeft="@drawable/ding_bg"/>
+        android:text="00"/>
+
     <TextView
         android:id="@+id/share"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="50dp"
-        android:text="00"
+        android:layout_weight="1"
+        android:drawableLeft="@mipmap/forward"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:drawableLeft="@mipmap/forward"/>
+        android:text="00"/>
+
     <TextView
         android:id="@+id/common"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="50dp"
-        android:text="00"
+        android:layout_weight="1"
         android:button="@null"
+        android:drawableLeft="@mipmap/commend"
         android:gravity="center_vertical"
-        android:paddingRight="20dp"
         android:paddingLeft="20dp"
-        android:drawableLeft="@mipmap/commend"/>
+        android:paddingRight="20dp"
+        android:text="00"/>
 </LinearLayout>
