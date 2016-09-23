@@ -66,6 +66,10 @@
         android:clickable="true"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp">
+        <SurfaceView
+            android:id="@+id/all_item_surface"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
         <ImageView
             android:id="@+id/all_item_thumbnail"
             android:layout_centerHorizontal="true"
