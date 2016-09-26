@@ -130,7 +130,7 @@ public abstract class UniversalAdapter<T> extends RecyclerView.Adapter<Universal
         int position = mRecyclerView.getChildAdapterPosition(v);
         if (position >= 0 && position < mData.size()) {
             if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(position);
+                mOnItemClickListener.onItemClick(v, position);
             }
         }
     }
@@ -176,6 +176,6 @@ public abstract class UniversalAdapter<T> extends RecyclerView.Adapter<Universal
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(View view, int position);
     }
 }

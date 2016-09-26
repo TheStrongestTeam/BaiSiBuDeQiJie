@@ -1,7 +1,6 @@
 package com.miraclehu.baisibudeqijie.adapter.essence;
 
 import android.content.Context;
-import android.media.MediaPlayer;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -50,22 +49,20 @@ public class EssenceVideoAdapter extends UniversalAdapter<VideoList> {
     }
 
     @Override
-    protected void onBindDataToView(RecyclerViewHolder holder, VideoList videoList, final int position) {
+    protected void onBindDataToView(RecyclerViewHolder holder, VideoList videoList, int position) {
         ImageView icon = holder.getImageView(R.id.essence_video_item_icon);
         TextView name = holder.getTextView(R.id.essence_video_item_name);
         ImageView isV = holder.getImageView(R.id.essence_video_item_is_v);
         TextView time = holder.getTextView(R.id.essence_video_item_passtime);
         TextView title = holder.getTextView(R.id.essence_video_item_title);
         ImageView preview = holder.getImageView(R.id.essence_video_item_preview);
+        preview.setVisibility(View.VISIBLE);
 
 
         SurfaceView surfaceView = (SurfaceView) holder.getView(R.id.essence_video_item_surface_view);
-        final SurfaceHolder surfaceHolder = surfaceView.getHolder();
-
-        final View pb = holder.getView(R.id.essence_video_item_pb);
+        View pb = holder.getView(R.id.essence_video_item_pb);
         pb.setVisibility(View.GONE);
         ImageView play = holder.getImageView(R.id.essence_video_item_play);
-
         play.setVisibility(View.VISIBLE);
 
         TextView down = holder.getTextView(R.id.cai);
@@ -74,6 +71,7 @@ public class EssenceVideoAdapter extends UniversalAdapter<VideoList> {
         TextView comment = holder.getTextView(R.id.common);
 
         View layout = holder.getView(R.id.layout);
+        layout.setTag(position);
         Video video = videoList.getVideo();
         // 缩放比
         float widthScale = (float) mMaxWidth / video.getWidth();
